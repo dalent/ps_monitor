@@ -13,7 +13,7 @@ class parser:
 
 gCommentRegular = r"^[ \t]*#"
 gSectionRegular = r'^[ \t]*\[(.+)\][ \t]*'
-gKeyValueRegular = r'^[ \t]*([^ \t=]+)[ \t=]([^ \t=\n]+)'
+gKeyValueRegular = r'^[ \t]*([^ \t=]+)[ \t=]([^\t=\n]+)'
 gKeyRegular = r'^[ \t]*([^ \t=\n]+)'
 
 gCommentRegex = re.compile(gCommentRegular)
@@ -65,10 +65,10 @@ class confParser(confParser):
     def parse(self, path):
         parser = Parser()
         service = {}
+        section = ""
         with open(path) as f:
-            section = ""
-            # no section just key value
             service[section] = {}
+            # no section just key value
             for line in f:
                 cType, group = parser.parseLine(line)
                 if cType == Type.Section:

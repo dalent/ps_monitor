@@ -24,7 +24,7 @@ class loggerService:
     fileHandler = None
     file = None
 
-    def __init__(self, level, path="./log"):
+    def __init__(self, level=loggerLevel.DEBUG, path="./log"):
         self.level = level
         self.logger = logging.getLogger()
         self.path = path
@@ -56,22 +56,37 @@ class loggerService:
 
     def info(self, *msg):
         self.check()
-        self.logger.info("sdf")
+        self.logger.info(msg)
 
     def debug(self, *msg):
         self.check()
-        self.logger.debug(*msg)
+        self.logger.debug(msg)
 
     def warning(self, *msg):
         self.check()
-        self.logger.warning(*msg)
+        self.logger.warning(msg)
 
     def error(self, *msg):
         self.check()
-        self.logger.error(*msg)
+        self.logger.error(msg)
 
     pass
 
 
 logger = loggerService(loggerLevel.DEBUG)
-logger.info('message','asdf')
+
+
+def info(*msg):
+    logger.info(msg)
+
+
+def debug(*msg):
+    logger.debug(msg)
+
+
+def warning(*msg):
+    logger.warning(msg)
+
+
+def error(*msg):
+    logger.error(msg)
