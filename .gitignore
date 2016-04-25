@@ -2,4 +2,5 @@ log
 *.pyc
 *.log
 *.out
+*.swp
 
