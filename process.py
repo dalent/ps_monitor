@@ -16,7 +16,7 @@ class Process:
     pids = []
     curFailedRetry = 0
     curTotalTry = 0
-    lastStartDate = time.time()
+    lastStartDate = 0
 
     def __init__(self, conf):
         self.options = conf
@@ -45,7 +45,7 @@ class Process:
         if self.curFailedRetry > self.options.failureRetries:
             logger.error("failed retry reach limit", self)
             return
-        if self.curTotalTry > 200:
+        if self.curTotalTry > self.options.retryLimit:
             logger.error("total retry reach limit:", self)
             return
         if self.options.startCmd == "":
@@ -54,7 +54,7 @@ class Process:
         curTime = time.time()
         diff = curTime - self.lastStartDate
         print diff
-        if diff < 3:
+        if diff < self.options.retryInterval:
             logger.error("not reach start interval:", diff, self)
             return
 
