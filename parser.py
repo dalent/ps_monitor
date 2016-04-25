@@ -13,8 +13,8 @@ class parser:
 
 gCommentRegular = r"^[ \t]*#"
 gSectionRegular = r'^[ \t]*\[(.+)\][ \t]*'
-gKeyValueRegular = r'^[ \t]*([^ \t=]+)[ \t=]([^\t=\n]+)'
-gKeyRegular = r'^[ \t]*([^ \t=\n]+)'
+gKeyValueRegular = r'^[ \t]*([^ \t=]+)[ \t=]([^\t=\r\n]+)'
+gKeyRegular = r'^[ \t]*([^ \t=\r\n]+)'
 
 gCommentRegex = re.compile(gCommentRegular)
 gSectionRegex = re.compile(gSectionRegular)
