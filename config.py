@@ -124,8 +124,6 @@ def parseProcessConf(path):
                     tmpProcess.searchCmd = v
                 elif k == 'retry_interval':
                     tmpProcess.retryInterval = int(v)
-                elif k == 'directory':
-                    tmpProcess.directory = v
                 elif k == 'total_retry_times':
                     tmpProcess.retryLimit = int(v)
                 elif k == 'directory':
