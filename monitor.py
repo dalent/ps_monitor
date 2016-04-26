@@ -5,12 +5,12 @@ main file
 """
 
 
-import logger
 import config
 import process
+import time
 
 
-class monitor:
+class Monitor:
     confPath = ''
     processConfs = []
     processes = []
@@ -21,23 +21,23 @@ class monitor:
         self.parseProcesses()
 
     def initConf(self):
-        self.processConfs = config.parseProcessConf(self.confPath)
+        self.processConfs = config.parseProcessDir(self.confPath)
 
     def parseProcesses(self):
-        if self.confs is None:
-            logger.info("no conf file ignore")
-            return
         for conf in self.processConfs:
             self.processes.append(process.Process(conf))
 
+    def checkProcess(self):
+        for proc in self.processes:
+            proc.checkProcess()
+
     pass
 
+monitor = None
 
 if __name__ == '__main__':
-    confs = config.parseProcessDir('conf')
-    logger.logger.info(confs)
-    processes = []
-    for conf in confs:
-        processes.append(process.Process(conf))
-    for proc in processes:
-        proc.checkProcess()
+    global monitor
+    monitor = Monitor('./conf')
+    while True:
+        monitor.checkProcess()
+        time.sleep(1)
